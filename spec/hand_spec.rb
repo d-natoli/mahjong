@@ -25,4 +25,16 @@ describe Hand do
       tile.value.should == tiles[index][-1]
     end
   end
+
+  it "sorts the tiles on creation" do
+    tiles = ["WIE", "BAM2", "BAM1", "CHA1", "CHA2", "DRG", "WIE"]
+    hand = Hand.new(tiles)
+    
+    tiles.sort!
+
+    hand.tiles.each_with_index do |tile, index|
+      tile.category.should == tiles[index][0..-2]
+      tile.value.should == tiles[index][-1]
+    end
+  end
 end
