@@ -37,17 +37,15 @@ private
     honour_tiles.count == 3 or honour_tiles.count == 0
   end
 
-  def validates_hand_contains_three_or_less_values_for_a_suite
+  def validates_hand_contains_five_or_less_different_values_for_a_suite
     suite_tiles = self.tiles.select{ |tile| tile.suite? }
-
     values = Hash.new(0)
 
     suite_tiles.each do |tile|
       values[tile.value] += 1
-      return true if values[tile.value] == suite_tiles.count - 3
     end
 
-    false
+    values.count <= 5 ? true : false
   end
 
   def validates_hand_contains_same_or_sequence_tiles

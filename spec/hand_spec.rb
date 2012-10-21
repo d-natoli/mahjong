@@ -76,6 +76,24 @@ describe Hand do
       hand.should_not be_valid
     end
 
+    it "should be invalid if there are more than 2 honour categories" do
+      tiles = []
+      9.times { tiles << "BAM1" }
+      2.times { tiles << "DRG" }
+      tiles << "WIE"
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
+    it "should be invalid if the honour tiles are different values" do
+      tiles = []
+      9.times { tiles << "BAM1" }
+      2.times { tiles << "DRG" }
+      tiles << "DRR"
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
     it "should be invalid if more than 3 suited tiles have different values" do
       tiles = []
       8.times { tiles << "BAM1" }
@@ -84,7 +102,26 @@ describe Hand do
       hand.should_not be_valid
     end
 
-    it "should be invalid if suited tiles are the same or in sequence" do
+    it "should be invalid if there a two sets of sequences" do
+      tiles = []
+      6.times { tiles << "BAM1" }
+      (1..3).each{ |n| tiles << "BAM#{n}" }
+      (5..8).each{ |n| tiles << "BAM#{n}" }
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
+    it "should be invalid if there a two sets of sequences and there is a set of honours" do
+      tiles = []
+      3.times { tiles << "DRG" }
+      3.times { tiles << "BAM1" }
+      (1..3).each{ |n| tiles << "BAM#{n}" }
+      (5..8).each{ |n| tiles << "BAM#{n}" }
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
+    it "should be invalid if suited tiles are not the same or in sequence" do
       tiles = []
       9.times { tiles << "BAM1" }
       tiles << "BAM2"
@@ -111,10 +148,20 @@ describe Hand do
 
     it "should be valid if there are 12 tiles and they are the same suit and same or sequence values" do
       tiles = []
-      9.times { tiles << "CIR5" }
+      3.times { tiles << "CIR5" }
+      3.times { tiles << "CIR9" }
+      3.times { tiles << "CIR2" }
       (1..3).each { |n| tiles << "CIR#{n}"}
       hand = Hand.new(tiles)
       hand.should be_valid
+    end
+
+    it "should be valid if there are 6 same tiles, 3 sequence tiles of the same suit and 3 of the same honour tiles" do
+      tiles = []
+      3.times { tiles << "WIS" }
+      3.times { tiles << "BAM8" }
+      3.times { tiles << "BAM2" }
+      (1..3).each { |n| tiles << "BAM#{n}"}
     end
   end
 end
