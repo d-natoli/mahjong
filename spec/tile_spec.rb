@@ -24,4 +24,42 @@ describe Tile do
       tile.value.should == "G"
     end
   end
+
+  describe ".description" do
+    it "should return the correct description for a suite" do
+      tile = Tile.new("CHA3")
+      tile.description.should == "CHA3"
+    end
+
+    it "should return the correct description for an honour" do
+      tile = Tile.new("DRG")
+      tile.description.should == "DRG"
+    end
+  end
+
+  describe ".<==>" do
+    it "should return 0 if the category and value are the same" do
+      tile1 = Tile.new("BAM1")
+      tile2 = Tile.new("BAM1")
+      tile1.<=>(tile2).should be_zero
+    end
+
+    it "should return -1 if the value is less" do
+      tile1 = Tile.new("BAM1")
+      tile2 = Tile.new("BAM2")
+      tile1.<=>(tile2).should == -1
+      tile1 = Tile.new("BAM1")
+      tile2 = Tile.new("CHA1")
+      tile1.<=>(tile2).should == -1
+    end
+
+    it "should return 1 if the value is more" do
+      tile1 = Tile.new("BAM3")
+      tile2 = Tile.new("BAM2")
+      tile1.<=>(tile2).should == 1
+      tile1 = Tile.new("WIE")
+      tile2 = Tile.new("CHA1")
+      tile1.<=>(tile2).should == 1
+    end
+  end
 end
