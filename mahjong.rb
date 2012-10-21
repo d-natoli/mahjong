@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-load 'tile_generator.rb'
+require_relative 'hand_validator'
 
 options = {}
 

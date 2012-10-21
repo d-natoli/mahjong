@@ -1,6 +1,36 @@
 require_relative '../tile'
 
 describe Tile do
+  describe "#new" do
+    it "should create a new tile for a bamboo tile" do
+      expect{ Tile.new("BAM1") }.to_not raise_error(ArgumentError)
+    end
+
+    it "should create a new tile for a character tile" do
+      expect{ Tile.new("CHA5") }.to_not raise_error(ArgumentError)
+    end
+
+    it "should create a new tile for a circle tile" do
+      expect{ Tile.new("CIR9") }.to_not raise_error(ArgumentError)
+    end
+
+    it "should create a new tile for a dragon tile" do
+      expect{ Tile.new("DRG") }.to_not raise_error(ArgumentError)
+    end
+
+    it "should create a new tile for a wind tile" do
+      expect{ Tile.new("WIN") }.to_not raise_error(ArgumentError)
+    end
+
+    it "should throw a bad argument exception if not a valid tile category" do
+      expect{ Tile.new("SIN") }.to raise_error(ArgumentError)
+    end
+
+    it "should throw a bad argument exception if not a valid tile value" do
+      expect{ Tile.new("CIR10") }.to raise_error(ArgumentError)
+    end
+  end
+
   describe ".category" do
     it "should return the correct category for a suite" do
       tile = Tile.new("BAM1")

@@ -1,11 +1,13 @@
 require_relative 'tile'
 
 class Hand
-  def initialize(tiles)
+  def initialize(tile_values)
     @tiles = []
 
-    tiles.each do |tile|
-      @tiles << Tile.new(tile)
+    begin
+      tile_values.each { |value| @tiles << Tile.new(value) }
+    rescue
+      tiles = []
     end
     
     @tiles.sort!
