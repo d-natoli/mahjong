@@ -106,4 +106,28 @@ describe Tile do
       Tile.new("CIR1").honour?.should be_false
     end
   end
+
+  describe ".same_or_next_tile?" do
+    let(:tile){ Tile.new("BAM2") }
+
+    it "should return true for an equal tile" do
+      tile.same_or_next_tile?(Tile.new("BAM2")).should be_true
+    end
+
+    it "should return true for next tile" do
+      tile.same_or_next_tile?(Tile.new("BAM3")).should be_true
+    end
+
+    it "should return false for a tile of a different category" do
+      tile.same_or_next_tile?(Tile.new("CHA2")).should be_false
+    end
+
+    it "should return false for a tile of not in sequence" do
+      tile.same_or_next_tile?(Tile.new("BAM5")).should be_false
+    end
+
+    it "should return false for previous tile" do
+      tile.same_or_next_tile?(Tile.new("BAM1")).should be_false
+    end
+  end
 end

@@ -33,8 +33,8 @@ private
   end
 
   def validates_hand_contains_three_or_zero_honours
-    honours = self.tiles.map { |tile| tile if tile.honour? }.compact
-    honours.count == 3 or honours.count == 0
+    honour_tiles = self.tiles.map { |tile| tile if tile.honour? }.compact
+    honour_tiles.count == 3 or honour_tiles.count == 0
   end
 
   def validates_hand_contains_three_or_less_values_for_a_suite
@@ -48,5 +48,17 @@ private
     end
 
     false
+  end
+
+  def validates_hand_contains_same_or_sequence_tiles
+    self.tiles.each_slice(3) do |group|
+      previous_tile = group.first
+      group.each do |tile|
+        return false unless previous_tile.same_or_next_tile? tile
+        previous_tile = tile
+      end
+    end
+
+    true
   end
 end
