@@ -44,9 +44,25 @@ describe Hand do
       hand.valid?.should be_false
     end
 
-    it "should be valid if there are 12 tiles" do
+    it "should be invalid if there are 12 tiles but different suites" do
+      tiles = []
+      suites = ["BAM", "CHA"].cycle
+      12.times { tiles << "#{suites.next}1" }
+      hand = Hand.new(tiles)
+      hand.valid?.should be_false
+    end
+
+    it "should be valid if there are 12 tiles and they are the same suite" do
       tiles = []
       12.times { tiles << "BAM1" }
+      hand = Hand.new(tiles)
+      hand.valid?.should be_true
+    end
+    
+    it "should be valid if there are 12 tiles and they are the same suite despite dragons or winds" do
+      tiles = []
+      descriptions = ["BAM1", "DRG", "WIE"].cycle
+      12.times { tiles << descriptions.next }
       hand = Hand.new(tiles)
       hand.valid?.should be_true
     end

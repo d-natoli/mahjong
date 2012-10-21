@@ -27,4 +27,8 @@ private
   def validates_number_of_tiles
     self.tiles.count == 12
   end
+
+  def validates_hand_contains_one_suit
+    self.tiles.map { |t| t.category unless t.honour? }.compact.uniq.count == 1
+  end
 end

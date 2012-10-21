@@ -62,4 +62,26 @@ describe Tile do
       tile1.<=>(tile2).should == 1
     end
   end
+
+  describe ".honour?" do
+    it "should return true for dragons" do
+      Tile.new("DRG").honour?.should be_true
+    end
+
+    it "should return true for winds" do
+      Tile.new("WIE").honour?.should be_true
+    end
+
+    it "should return false for characters" do
+      Tile.new("CHA1").honour?.should be_false
+    end
+
+    it "should return false for bamboos" do
+      Tile.new("BAM1").honour?.should be_false
+    end
+
+    it "should return false for circles" do
+      Tile.new("CIR1").honour?.should be_false
+    end
+  end
 end

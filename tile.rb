@@ -17,6 +17,10 @@ class Tile
     "#{@category}#{@value}"
   end
 
+  def honour?
+    category == "DR" or category == "WI"
+  end
+
   def <=>(another_tile)
     if self.description < another_tile.description
       -1
