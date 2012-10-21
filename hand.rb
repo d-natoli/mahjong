@@ -31,4 +31,9 @@ private
   def validates_hand_contains_one_suit
     self.tiles.map { |t| t.category unless t.honour? }.compact.uniq.count == 1
   end
+
+  def validates_hand_contains_three_or_zero_honours
+    honours = self.tiles.map { |t| t if t.honour? }.compact
+    honours.count == 3 or honours.count == 0
+  end
 end

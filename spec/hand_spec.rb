@@ -41,30 +41,54 @@ describe Hand do
   describe ".valid?" do
     it "should be invalid if there aren't 12 tiles" do
       hand = Hand.new(["BAM1"])
-      hand.valid?.should be_false
+      hand.should_not be_valid
     end
 
     it "should be invalid if there are 12 tiles but different suites" do
       tiles = []
-      suites = ["BAM", "CHA"].cycle
-      12.times { tiles << "#{suites.next}1" }
+      suites_enumerator = ["BAM", "CHA"].cycle
+      12.times { tiles << "#{suites_enumerator.next}1" }
       hand = Hand.new(tiles)
-      hand.valid?.should be_false
+      hand.should_not be_valid
+    end
+
+    it "should be invalid if there are more than 3 honour tiles" do
+      tiles = []
+      description_enumerator = ["BAM1", "DRG"].cycle
+      12.times { tiles << description_enumerator.next }
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
+    it "should be invalid if there are 2 honour tiles" do
+      tiles = []
+      10.times { tiles << "BAM1" }
+      2.times { tiles << "DRG" }
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
+    it "should be invalid if there is 1 honour tile" do
+      tiles = []
+      11.times { tiles << "BAM1" }
+      tiles << "DRG"
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
     end
 
     it "should be valid if there are 12 tiles and they are the same suite" do
       tiles = []
       12.times { tiles << "BAM1" }
       hand = Hand.new(tiles)
-      hand.valid?.should be_true
+      hand.should be_valid
     end
-    
+
     it "should be valid if there are 12 tiles and they are the same suite despite dragons or winds" do
       tiles = []
-      descriptions = ["BAM1", "DRG", "WIE"].cycle
-      12.times { tiles << descriptions.next }
+      9.times { tiles << "BAM1" }
+      3.times { tiles << "DRG" }
       hand = Hand.new(tiles)
-      hand.valid?.should be_true
+      hand.should be_valid
     end
   end
 end
