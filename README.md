@@ -19,8 +19,8 @@ A pong is a either:
 Write a program which takes in a csv file as an argument and outputs if the hand is valid or invalid. A sample csv of the input format expected is attached, as well as the list below which defines all input formats.
 
 Expected values for a tile are:
-  Bamboo: BAM1 - BAM9
-  Character: CHA1 - CHA9
-  Circle: CIR1 - CIR9
-  Dragons (Red, Green, White) DRR, DRG, DRW
-  Winds (East, South, West, North) WIE, WIS, WIW, WIN
+- Bamboo: BAM1 - BAM9
+- Character: CHA1 - CHA9
+- Circle: CIR1 - CIR9
+- Dragons (Red, Green, White) DRR, DRG, DRW
+- Winds (East, South, West, North) WIE, WIS, WIW, WIN
