@@ -76,6 +76,14 @@ describe Hand do
       hand.should_not be_valid
     end
 
+    it "should be invalid if more than 3 suited tiles have different values" do
+      tiles = []
+      8.times { tiles << "BAM1" }
+      4.times { tiles << "BAM3" }
+      hand = Hand.new(tiles)
+      hand.should_not be_valid
+    end
+
     it "should be valid if there are 12 tiles and they are the same suite" do
       tiles = []
       12.times { tiles << "BAM1" }

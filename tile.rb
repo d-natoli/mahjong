@@ -17,6 +17,10 @@ class Tile
     "#{@category}#{@value}"
   end
 
+  def suite?
+    !honour?
+  end
+
   def honour?
     category == "DR" or category == "WI"
   end

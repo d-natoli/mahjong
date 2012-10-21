@@ -63,6 +63,28 @@ describe Tile do
     end
   end
 
+  describe ".suite?" do
+    it "should return false for dragons" do
+      Tile.new("DRG").suite?.should be_false
+    end
+
+    it "should return false for winds" do
+      Tile.new("WIE").suite?.should be_false
+    end
+
+    it "should return true for characters" do
+      Tile.new("CHA1").suite?.should be_true
+    end
+
+    it "should return true for bamboos" do
+      Tile.new("BAM1").suite?.should be_true
+    end
+
+    it "should return true for circles" do
+      Tile.new("CIR1").suite?.should be_true
+    end
+  end
+
   describe ".honour?" do
     it "should return true for dragons" do
       Tile.new("DRG").honour?.should be_true
