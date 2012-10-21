@@ -1,3 +1,5 @@
+require_relative 'tile'
+
 class Hand
   def initialize(tiles)
     @tiles = []

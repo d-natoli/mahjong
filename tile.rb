@@ -29,7 +29,8 @@ class Tile
     return true if self.description == another_tile.description
   
     if self.suite? and self.category == another_tile.category
-      self.value.to_i == another_tile.value.to_i or (self.value.to_i+1) == another_tile.value.to_i
+      self.value.to_i == another_tile.value.to_i or
+        (self.value.to_i+1) == another_tile.value.to_i
     else
       false
     end
