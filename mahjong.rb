@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require_relative 'hand_validator'
+require_relative 'lib/hand_validator'
 
 options = {}
 
