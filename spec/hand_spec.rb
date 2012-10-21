@@ -37,4 +37,18 @@ describe Hand do
       tile.value.should == tiles[index][-1]
     end
   end
+
+  describe ".valid?" do
+    it "should be invalid if there aren't 12 tiles" do
+      hand = Hand.new(["BAM1"])
+      hand.valid?.should be_false
+    end
+
+    it "should be valid if there are 12 tiles" do
+      tiles = []
+      12.times { tiles << "BAM1" }
+      hand = Hand.new(tiles)
+      hand.valid?.should be_true
+    end
+  end
 end
