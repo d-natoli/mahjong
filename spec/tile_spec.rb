@@ -152,6 +152,10 @@ describe Tile do
       tile.same_or_next_tile?(Tile.new("CHA2")).should be_false
     end
 
+    it "should return false for a tile in sequence but of a different category" do
+      tile.same_or_next_tile?(Tile.new("CHA3")).should be_false
+    end
+
     it "should return false for a tile of not in sequence" do
       tile.same_or_next_tile?(Tile.new("BAM5")).should be_false
     end
