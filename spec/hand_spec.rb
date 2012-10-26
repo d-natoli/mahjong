@@ -1,27 +1,7 @@
-require_relative "../hand"
-require_relative "../tile"
+require_relative "../lib/hand"
+require_relative "../lib/tile"
 
 describe Hand do
-  it "blah" do
-    tiles = []
-    4.times { tiles << "BAM1" }
-    4.times { tiles << "BAM2" }
-    4.times { tiles << "BAM3" }
-    hand = Hand.new(tiles)
-    hand.should be_valid
-  end
-
-  it "blah" do
-    tiles = []
-    4.times { tiles << "BAM1" }
-    4.times { tiles << "BAM2" }
-    3.times { tiles << "BAM3" }
-    tiles << "BAM4"
-    hand = Hand.new(tiles)
-    hand.should_not be_valid
-  end
-
-
   it "creates Tile objects" do
     hand = Hand.new(["BAM1"])
     hand.tiles.first.kind_of?(Tile).should be_true

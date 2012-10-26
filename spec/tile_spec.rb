@@ -1,4 +1,4 @@
-require_relative '../tile'
+require_relative '../lib/tile'
 
 describe Tile do
   describe "#new" do
