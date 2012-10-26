@@ -13,7 +13,6 @@ class Tile
 
   def initialize(description)
     raise ArgumentError unless self.class.valid_tiles.include?(description)
-
     @category, @value = description[0..-2], description[-1]
   end
 
@@ -38,14 +37,8 @@ class Tile
   end
 
   def same_or_next_tile?(another_tile)
-    return true if self.description == another_tile.description
-  
-    if self.suite? and self.category == another_tile.category
-      self.value.to_i == another_tile.value.to_i or
-        (self.value.to_i+1) == another_tile.value.to_i
-    else
-      false
-    end
+    return true if self == another_tile
+    self.suite? and next_tile  == another_tile.description
   end
 
   def <=>(another_tile)
@@ -56,5 +49,11 @@ class Tile
     else
        0
     end
+  end
+
+private
+  def next_tile
+    index = self.class.valid_tiles.index(self.description)
+    self.class.valid_tiles[index+1]
   end
 end

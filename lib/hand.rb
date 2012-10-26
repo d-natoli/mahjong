@@ -3,14 +3,10 @@ require_relative 'tile'
 class Hand
   def initialize(tile_values)
     @tiles = []
-
-    begin
-      tile_values.each { |value| @tiles << Tile.new(value) }
-    rescue
-      tiles = []
-    end
-    
+    tile_values.each { |value| @tiles << Tile.new(value) }
     @tiles.sort!
+  rescue ArgumentError
+    @tiles = []
   end
 
   def tiles
@@ -19,11 +15,7 @@ class Hand
 
   def valid?
     validators = self.class.private_instance_methods.select { |m| m.to_s.start_with?("validates") }
-    
-    validators.each do |validator|
-      return false unless send(validator)
-    end
-
+    validators.each { |v| return false unless send(v) }
     true
   end
 
@@ -42,13 +34,8 @@ private
   end
 
   def validates_hand_contains_five_or_less_different_values_for_a_suite
-    suite_tiles = self.tiles.select{ |tile| tile.suite? }
     values = Hash.new(0)
-
-    suite_tiles.each do |tile|
-      values[tile.value] += 1
-    end
-
+    tiles.each { |tile| values[tile.value] += 1 if tile.suite? }
     values.count <= 5 ? true : false
   end
 
