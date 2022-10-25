@@ -1,28 +1,23 @@
+# frozen_string_literal: true
+
+# This class represents a tile
 class Tile
   include Comparable
 
-  def self.valid_tiles
-    tiles = []
-    (1..9).each{ |n| tiles << "BAM#{n}" }
-    (1..9).each{ |n| tiles << "CHA#{n}" }
-    (1..9).each{ |n| tiles << "CIR#{n}" }
-    tiles += ["DRG", "DRR", "DRW"]
-    tiles += ["WIN", "WIE", "WIS", "WIW"]
-    tiles
-  end
+  VALID_TILES = %w[DRG DRR DRW WIN WIE WIS WIW] + (1..9).each_with_object([]) do |n, t|
+    t << "BAM#{n}"
+    t << "CHA#{n}"
+    t << "CIR#{n}"
+  end.sort.freeze
 
   def initialize(description)
-    raise ArgumentError unless self.class.valid_tiles.include?(description)
-    @category, @value = description[0..-2], description[-1]
+    raise ArgumentError unless VALID_TILES.include?(description)
+
+    @category = description[0..-2]
+    @value = description[-1]
   end
 
-  def category
-    @category
-  end
-
-  def value
-    @value
-  end
+  attr_reader :category, :value
 
   def description
     "#{@category}#{@value}"
@@ -33,27 +28,28 @@ class Tile
   end
 
   def honour?
-    category == "DR" or category == "WI"
+    %w[DR WI].include?(category)
   end
 
   def same_or_next_tile?(another_tile)
     return true if self == another_tile
-    self.suite? and next_tile  == another_tile.description
+
+    suite? && next_tile == another_tile
   end
 
-  def <=>(another_tile)
-    if self.description < another_tile.description
+  def <=>(other)
+    if description < other.description
       -1
-    elsif self.description > another_tile.description
+    elsif description > other.description
       1
     else
-       0
+      0
     end
   end
 
-private
+  private
+
   def next_tile
-    index = self.class.valid_tiles.index(self.description)
-    self.class.valid_tiles[index+1]
+    self.class.new(VALID_TILES[VALID_TILES.index(description) + 1])
   end
 end

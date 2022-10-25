@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'optparse'
 require_relative 'lib/hand_validator'
@@ -6,13 +7,13 @@ require_relative 'lib/hand_validator'
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: mahjong.rb [options]"
+  opts.banner = 'Usage: mahjong.rb [options]'
 
-  opts.on("-i FILE", "--input FILE", "Mahjong hands input file. Required.") do |f|
+  opts.on('-i FILE', '--input FILE', 'Mahjong hands input file. Required.') do |f|
     options[:file] = f
   end
 
-  opts.on_tail("-h", "--help", "Show this message") do
+  opts.on_tail('-h', '--help', 'Show this message') do
     puts opts
     exit
   end
