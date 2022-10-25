@@ -24,3 +24,19 @@ Expected values for a tile are:
 - Circle: CIR1 - CIR9
 - Dragons (Red, Green, White) DRR, DRG, DRW
 - Winds (East, South, West, North) WIE, WIS, WIW, WIN
+
+
+### Usage
+You can run the program with some sample data using
+
+```
+./mahjong.rb -i samples/samples.csv
+```
+
+If working correctly, this should print
+```
+true
+true
+true
+false
+```
