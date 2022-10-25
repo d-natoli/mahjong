@@ -25,7 +25,7 @@ class Hand
   end
 
   def validates_hand_contains_one_suit
-    tiles.map { |tile| tile.category unless tile.honour? }.compact.uniq.count == 1
+    tiles.map { |tile| tile.category }.compact.uniq.count == 1
   end
 
   def validates_hand_contains_three_or_zero_honours

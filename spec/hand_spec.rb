@@ -186,35 +186,10 @@ describe Hand do
       end
     end
 
-    context 'when there are 12 tiles and they are the same suite despite dragons or winds' do
-      let(:tiles) do
-        [].tap do |t|
-          9.times { t << 'BAM1' }
-          3.times { t << 'DRG' }
-        end
-      end
-
-      it 'is valid' do
-        expect(hand).to be_valid
-      end
-    end
-
     context 'when there are 12 tiles and they are the same suit and same or sequence values' do
       let(:tiles) do
         [].tap do |t|
           3.times { |n| t.concat(['CIR5', 'CIR9', 'CIR2', "CIR#{n + 1}"]) }
-        end
-      end
-
-      it 'is valid' do
-        expect(hand).to be_valid
-      end
-    end
-
-    context 'when there are 6 same tiles, 3 sequence tiles of the same suit and 3 of the same honour tiles' do
-      let(:tiles) do
-        [].tap do |t|
-          3.times { |n| t.concat(['WIS', 'BAM8', 'BAM2', "BAM#{n + 1}"]) }
         end
       end
 
